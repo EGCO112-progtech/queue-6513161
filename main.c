@@ -8,24 +8,35 @@
 int main(int argc , char **argv) {
   NodePtr headPtr=NULL;
    NodePtr tailPtr=NULL;
-/* For struct Queue
+
+//For struct Queue
   Queue  q;
-   q. headPtr=NULL;
+   q.headPtr=NULL;
    q.tailPtr=NULL;
    q.size=0;
-*/
-   int i,x;
+
+   int i,x,customer_number=1;
    
 
  for(i=1;i<argc;i++){
         if(strcmp(argv[i],"x")==0){
-            x=dequeue(&headPtr,&tailPtr);
-            printf("dequeing %d\n",x);
-        }
+            dequeue_struct(&q,customer_number);
+            customer_number++;
+            }
         else {
-       enqueue_struct(&headPtr,&tailPtr, atoi(argv[i]));
-           
+       enqueue_struct(&q, atoi(argv[i]),atoi(argv[i+1]));
+          i++;
         }
- }
+   }
+  printf("=============================\n");
+  if(q.size==1)
+    printf("There is %d ppl left in the queue\n",q.size);
+  else if(q.size>1)
+    printf("There are %d ppl left in the queue\n",q.size);
+  if(q.size>0){
+  printf("Clering all node.\n");
+  while(q.size>0)
+      dequeue_struct(&q,999);
+    }
   return 0;
-}
+  }
